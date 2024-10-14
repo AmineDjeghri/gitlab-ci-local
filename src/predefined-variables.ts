@@ -41,7 +41,7 @@ export function init ({gitData, argv, envMatchedVariables}: PredefinedVariablesO
       ?? `${CI_SERVER_PROTOCOL}://${CI_SERVER_FQDN}`;
     const CI_PROJECT_ROOT_NAMESPACE = gitData.remote.group.split("/")[0];
     const CI_PROJECT_NAMESPACE = gitData.remote.group;
-    const CI_DEPENDENCY_PROXY_SERVER = `${CI_SERVER_HOST}:${CI_SERVER_PORT}`; // NOTE: unlike CI_SERVER_FQDN, CI_DEPENDENCY_PROXY_SERVER also has ports
+    const CI_DEPENDENCY_PROXY_SERVER = CI_SERVER_FQDN.includes(":") ? CI_SERVER_FQDN : `${CI_SERVER_HOST}:${CI_SERVER_PORT}`;
 
     const predefinedVariables: {[key: string]: string} = {
         CI: "true",
